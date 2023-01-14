@@ -4,6 +4,7 @@ from flask_restx import Api
 from config import Config
 from create_db import make_db
 from setup_db import db
+from view.authorization import auth_ns
 from view.directors import director_ns
 from view.genres import genre_ns
 from view.movies import movie_ns
@@ -22,6 +23,7 @@ def register_params(app):
     api.add_namespace(movie_ns)
     api.add_namespace(director_ns)
     api.add_namespace(genre_ns)
+    api.add_namespace(auth_ns)
 
 
 def create_table(app):
