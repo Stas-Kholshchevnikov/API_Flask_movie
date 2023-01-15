@@ -8,7 +8,7 @@ from service.genre import GenreService
 from service.movie import MovieService
 from service.user import UserService
 from setup_db import db
-
+# Создание зависимостей слоев Service и DAO
 movie_dao = MovieDAO(db.session)
 movie_service = MovieService(movie_dao)
 

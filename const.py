@@ -1,3 +1,5 @@
+#Описание констант используемых в проекте
+
 COUNT_RECORDS = 12
 SECRET = "CouRSE_WorK_4"
 ALGO = "HS256"

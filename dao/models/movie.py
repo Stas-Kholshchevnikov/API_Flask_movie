@@ -3,6 +3,9 @@ from marshmallow import Schema, fields
 
 
 class Movie(db.Model):
+    """
+    Модель данных для таблцы movies
+    """
     __tablename__ = 'movies'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
@@ -17,6 +20,9 @@ class Movie(db.Model):
 
 
 class MovieSchema(Schema):
+    """
+    Схема данных для таблицы movies
+    """
     id = fields.Int(dump_only=True)
     title = fields.Str()
     description = fields.Str()

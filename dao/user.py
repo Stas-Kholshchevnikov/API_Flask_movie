@@ -3,7 +3,7 @@ from dao.models.user import User
 
 class UserDAO:
     """
-    ласс работы с таблицей user базы данных
+    Класс работы с таблицей user базы данных
     """
     def __init__(self, session):
         self.session = session
@@ -34,27 +34,16 @@ class UserDAO:
         self.session.commit()
         return new_user
 
-    def update(self, data, uid):
+    def update(self, data, user_email):
         """
         Обновление значений записи в таблице БД
         :param data:
         :param uid:
         :return:
         """
-        self.session.query(User).filter(User.id == uid).update(data)
+        self.session.query(User).filter(User.email == user_email).update(data)
         self.session.commit()
-        return self.get_one(uid)
-
-    def delete(self, uid):
-        """
-        Удаление записи таблицы БД
-        :param uid:
-        :return:
-        """
-        user = self.session.query(User).get(uid)
-        self.session.delete(user)
-        self.session.commit()
-        return
+        return self.get_by_email(user_email)
 
     def get_by_email(self, user_email):
         """

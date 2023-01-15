@@ -15,13 +15,26 @@ def auth_required(func):
             abort(401)
 
         data = request.headers['Authorization']
-        token = data.split('Bearer ')[-1]
+        decode_token(data)
 
-        try:
-            jwt.decode(token, SECRET, algorithms=ALGO)
-        except Exception:
-            abort(401)
         return func(*args, **kwargs)
 
     return wrapper
+
+
+def decode_token(data):
+    """
+    Функиця декодирования токена
+    :param data:
+    :return:
+    """
+
+    token = data.split('Bearer ')[-1]
+
+    try:
+        token_info = jwt.decode(token, SECRET, algorithms=ALGO)
+        user_email = token_info.get("email")
+        return user_email
+    except Exception:
+        abort(401)
 

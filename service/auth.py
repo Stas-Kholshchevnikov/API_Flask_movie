@@ -13,10 +13,6 @@ class AuthService:
     def __init__(self, dao: UserDAO):
         self.dao = dao
 
-    # def create_new_user(self, data):
-    #     data["password"] = self.get_hash(data["password"])
-    #     return self.dao.create(data)
-
     def get_token(self, data):
         """
         функция получения пары токенов
@@ -73,8 +69,8 @@ class AuthService:
         :param token_data:
         :return:
         """
-        min10 = datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
-        token_data["exp"] = calendar.timegm(min10.timetuple())
+        min30 = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
+        token_data["exp"] = calendar.timegm(min30.timetuple())
         access_token = jwt.encode(token_data, SECRET, algorithm=ALGO)
         day10 = datetime.datetime.utcnow() + datetime.timedelta(days=10)
         token_data["exp"] = calendar.timegm(day10.timetuple())

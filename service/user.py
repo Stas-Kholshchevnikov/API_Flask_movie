@@ -12,21 +12,6 @@ class UserService:
     def __init__(self, dao: UserDAO):
         self.dao = dao
 
-    def get_one(self, uid):
-        """
-        Функция получения одной записи
-        :param uid:
-        :return:
-        """
-        return self.dao.get_one(uid)
-
-    def get_all(self):
-        """
-        Функция получения всех записей
-        :return:
-        """
-        return self.dao.get_all()
-
     def create(self, data):
         """
         Функция создания записи
@@ -36,26 +21,38 @@ class UserService:
         data["password"] = self.get_hash(data["password"])
         return self.dao.create(data)
 
-    def update(self, data, uid):
+    def get_by_email(self, user_email):
+        """
+        Функция получения даннных пользовател по его email
+        :param user_email:
+        :return:
+        """
+        return self.dao.get_by_email(user_email)
+
+    def update_info(self, data, user_email):
         """
         Функция обновления данных записи
         :param data:
-        :param uid:
+        :param user_email:
         :return:
         """
-        try:
-            data["password"] = self.get_hash(data["password"])
-        except Exception:
-            pass
-        return self.dao.update(data, uid)
+        return self.dao.update(data, user_email)
 
-    def delete(self, uid):
+
+    def update_password(self, data, user_email):
         """
-        Функция удаления записи
-        :param uid:
-        :return:
+        Функция смены паротя доступа для пользователя
         """
-        return self.dao.delete(uid)
+        data["password_1"] = self.get_hash(data["password_1"])
+        user = self.dao.get_by_email(user_email)
+        if data["password_1"] == user.password:
+            new_pass = {}
+            new_pass["password"] = self.get_hash(data["password_2"])
+            self.dao.update(new_pass, user_email)
+            return "The password has been successfully changed", 204
+        else:
+            return "Error: Invalid old password", 400
+
 
     def get_hash(self, password):
         """

@@ -1,4 +1,4 @@
-#файл для первичного создания db
+
 from setup_db import db
 
 from dao.models.movie import Movie
@@ -9,6 +9,10 @@ from dao.models.genre import Genre
 
 
 def make_db():
+    """
+    Создание первичных записей в БД
+    :return:
+    """
     db.drop_all()
     db.create_all()
 

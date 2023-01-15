@@ -11,6 +11,10 @@ users_schema = UserSchema(many=True)
 @auth_ns.route("/register")
 class Register(Resource):
     def post(self):
+        """
+        Функция создания нового пользователя
+        :return:
+        """
         data = request.json
         result = user_service.create(data)
         return user_schema.dump(result), 201
@@ -18,12 +22,20 @@ class Register(Resource):
 @auth_ns.route("/login")
 class Login(Resource):
     def post(self):
+        """
+        Функция авторизации пользователя и получения пары токенов для доступа
+        :return:
+        """
         data = request.json
         result = auth_service.get_token(data)
-        return result
+        return result, 200
 
     def put(self):
+        """
+        Функция обновления пары токенов
+        :return:
+        """
         data = request.json
         result = auth_service.refresh_token(data)
-        return result
+        return result, 204
 
