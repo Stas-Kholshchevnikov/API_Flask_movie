@@ -11,4 +11,7 @@
 Полный функционал сервиса можно посмотреть с помощью ***Swagger*** (Адрес: localhost или 127.0.0.1; порт: 5000)
 
 # Стек
+***Python, Flask, SQLAlchemy, Marshmallow, REST, CRUD, JWT***
+
+<img src="https://img.shields.io/badge/Python-white?style=for-the-badge&logo=python&logoColor=blue"/> <img src="https://img.shields.io/badge/flask-white?style=for-the-badge&logo=flask&logoColor=blue"/> <img src="https://img.shields.io/badge/SQLAlchemy-white?style=for-the-badge&logo=SQLite&logoColor=blue"/> <img src="https://img.shields.io/badge/Marshmallow-white?style=for-the-badge&logo=python&logoColor=blue"/>
 
